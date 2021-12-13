@@ -55,9 +55,9 @@ VALUES
 -------------------------
 
 ('b55243d1-27b5-49bf-8436-67d5ada33975', 'PASSWORD_COMPLEXITY',
-'UPPERCASE:chars=ABCDEFGHIJKLMNOPQRSTUVWXYZ::min=-1::LOWERCASE:chars=abcdefghijklmnopqrstuvwxyz::min=-1::NUMBERS:chars=0123456789::min=-1::',
+'UPPERCASE:chars=ABCDEFGHIJKLMNOPQRSTUVWXYZ::min=1::LOWERCASE:chars=abcdefghijklmnopqrstuvwxyz::min=1::NUMBERS:chars=0123456789::min=1::SPECIALCHARACTER:chars=!@#$%^&*()::min=1::',
 'complexity groups definition. format:\n[name:chars=x::min=y::...]\nmin=-1 no limit. following chars should be escaped: \\t, \\n, \\f, \\'', \\" \\\\'),
-('24e7de2f-a714-4f3e-8f64-13bc6ee7525b', 'MIN_LENGTH', 6, 'passwords are at least X characters long'),
+('24e7de2f-a714-4f3e-8f64-13bc6ee7525b', 'MIN_LENGTH', 9, 'passwords are at least X characters long'),
 
 --
 -- Search queries
