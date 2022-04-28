@@ -449,7 +449,17 @@ public class Authentication implements Observer {
         String newCredentials
     ) throws GeneralSecurityException, IOException {
         AuthResponse response = null;
-        if (newCredentials.length() < settings.get(Schema.Settings.MIN_LENGTH, Integer.class)) {
+        
+	//Check password is different form userID
+        if (newCredentials.equals(user.getName())) {
+        	response = AuthResponse.negative(
+                    Authn.AuthResult.GENERAL_ERROR,
+                    user,
+                    "password cannot same with user name"
+                );
+        }
+	
+	if (newCredentials.length() < settings.get(Schema.Settings.MIN_LENGTH, Integer.class)) {
             response = AuthResponse.negative(
                 Authn.AuthResult.GENERAL_ERROR,
                 user,
