@@ -111,6 +111,8 @@ public class Authentication implements Observer {
     private final DataSource ds;
     private ExtMap settings;
     private Complexity complexity;
+    //key
+    private KeyboardConsecution keyboardConsecution = new KeyboardConsecution();
     public Authentication(DataSource ds) {
         this.ds = ds;
     }
@@ -449,8 +451,8 @@ public class Authentication implements Observer {
         String newCredentials
     ) throws GeneralSecurityException, IOException {
         AuthResponse response = null;
-        
-	//Check password is different form userID
+ 
+        //Check password is different form userID
         if (newCredentials.equals(user.getName())) {
         	response = AuthResponse.negative(
                     Authn.AuthResult.GENERAL_ERROR,
@@ -458,8 +460,9 @@ public class Authentication implements Observer {
                     "password cannot same with user name"
                 );
         }
-	
-	if (newCredentials.length() < settings.get(Schema.Settings.MIN_LENGTH, Integer.class)) {
+        
+        
+        if (newCredentials.length() < settings.get(Schema.Settings.MIN_LENGTH, Integer.class)) {
             response = AuthResponse.negative(
                 Authn.AuthResult.GENERAL_ERROR,
                 user,
@@ -474,6 +477,15 @@ public class Authentication implements Observer {
                 complexity.getUsage()
             );
         }
+        //test
+        if (response == null && !keyboardConsecution.check(newCredentials)) {
+            response = AuthResponse.negative(
+                Authn.AuthResult.GENERAL_ERROR,
+                user,
+                keyboardConsecution.getUsage()
+            );
+        }
+        
         if (response == null && !user.getPassword().equals("") && EnvelopePBE.check(user.getPassword(), newCredentials)) {
             response = AuthResponse.negative(Authn.AuthResult.GENERAL_ERROR, user, "new password already used");
         }
@@ -518,6 +530,7 @@ public class Authentication implements Observer {
             throw new IllegalArgumentException("Cannot parse filters");
         }
 
-        this.complexity = new Complexity(groups);;
+        this.complexity = new Complexity(groups);
         }
 }
+
