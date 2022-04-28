@@ -42,7 +42,7 @@ VALUES
 
 ('dc3e2fb4-cbcc-4f5c-9b06-5db9ec534aa8','PASSWORD_EXPIRATION_DAYS', 180, 'upon expired password change, new password is valid to X days'),
 ('69d5cec2-bd1a-42e1-84f0-05627ee476b3','PASSWORD_EXPIRATION_NOTICE_DAYS', 0, 'show message X days before expiration'),
-('e843bc2a-0878-4b6f-9be3-32e83169fb7c', 'PASSWORD_HISTORY_LIMIT', 3, 'number of old passwords to keep/check against in password change'),
+('e843bc2a-0878-4b6f-9be3-32e83169fb7c', 'PASSWORD_HISTORY_LIMIT', 2, 'number of old passwords to keep/check against in password change'),
 --
 ('aaa93f69-7b75-44ee-b8a7-4d4736e73be1', 'ALLOW_EXPIRED_PASSWORD_CHANGE', FALSE, 'if true when a password expires the user can change it'),
 
